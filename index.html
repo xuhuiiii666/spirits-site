@@ -773,48 +773,43 @@ const products = [
     tasting: "雅典XO，适合门店展示与礼赠。",
     range: "建议零售价：¥280"
   },
-  {
-    id: 13,
-    name: "Jinluyi XO 700ml",
-    cnName: "金路易 XO",
-    category: "Brandy",
-    price: "¥988",
-    priceNote: "条形码扫描价",
-    soldOut: false,
-    badge: "XO",
-    image: "./jinluyi.JPG",
-    specs: ["法国", "皇马", "700ml*6", "40%vol"],
-    tasting: "金路易XO，瓶型与礼盒更偏陈列感。",
-    range: "建议零售价：¥298"
-  },
-  {
-    id: 14,
-    name: "Jinluyi XO 1L",
-    cnName: "金路易 XO 1L",
-    category: "Brandy",
-    price: "¥1280",
-    priceNote: "条形码扫描价",
-    soldOut: false,
-    badge: "XO",
-    image: "https://via.placeholder.com/800x800?text=Jinluyi+XO+1L",
-    specs: ["法国", "皇马", "1L*6", "40%vol"],
-    tasting: "金路易XO 1L装，适合更强规格感的展示场景。",
-    range: "建议零售价：¥368"
-  },
-  {
-    id: 15,
-    name: "Jinluyi XO 1.5L",
-    cnName: "金路易 XO 1.5L",
-    category: "Brandy",
-    price: "¥2888",
-    priceNote: "条形码扫描价",
-    soldOut: false,
-    badge: "XO",
-    image: "https://via.placeholder.com/800x800?text=Jinluyi+XO+1.5L",
-    specs: ["法国", "皇马", "1.5L*4", "40%vol"],
-    tasting: "金路易XO 1.5L，大规格更适合宴席与高锚点陈列。",
-    range: "建议零售价：¥498"
-  },
+{
+  id: 13,
+  name: "Jinluyi XO",
+  cnName: "金路易 XO",
+  category: "Brandy",
+  badge: "XO",
+  tasting: "金路易XO，瓶型与礼盒更偏陈列感，适合礼赠与展示型消费场景。",
+  variants: [
+    {
+      label: "700ml",
+      image: "./jinluyi.JPG",
+      price: "¥988",
+      priceNote: "条形码扫描价",
+      range: "建议零售价：¥298",
+      specs: ["法国", "皇马", "700ml*6", "40%vol"],
+      soldOut: true
+    },
+    {
+      label: "1L",
+      image: "./jinluyi.JPG",
+      price: "¥1280",
+      priceNote: "条形码扫描价",
+      range: "建议零售价：¥368",
+      specs: ["法国", "皇马", "1L*6", "40%vol"],
+      soldOut: true
+    },
+    {
+      label: "1.5L",
+      image: "./jinluyi.JPG",
+      price: "¥2888",
+      priceNote: "条形码扫描价",
+      range: "建议零售价：¥498",
+      specs: ["法国", "皇马", "1.5L*4", "40%vol"],
+      soldOut: true
+    }
+  ]
+},
   {
     id: 16,
     name: "Yinzun XO 700ml",
@@ -926,74 +921,101 @@ const products = [
     specs: ["法国", "皇马", "3L*4", "40%vol"],
     tasting: "皇马XO 3L，大规格高锚点产品，适合陈列与宴席场景。",
     range: "建议零售价：¥1398"
-  }
-];
-    const productGrid = document.getElementById("productGrid");
-    const tasteGrid = document.getElementById("tasteGrid");
-    const searchInput = document.getElementById("searchInput");
-    const categorySelect = document.getElementById("categorySelect");
+function renderProducts() {
+  const q = searchInput.value.trim().toLowerCase();
+  const category = categorySelect.value;
 
-    const modal = document.getElementById("productModal");
-    const modalImage = document.getElementById("modalImage");
-    const modalTitle = document.getElementById("modalTitle");
-    const modalSubtitle = document.getElementById("modalSubtitle");
-    const modalPrice = document.getElementById("modalPrice");
-    const modalPriceNote = document.getElementById("modalPriceNote");
-    const modalSpecs = document.getElementById("modalSpecs");
-    const modalTasting = document.getElementById("modalTasting");
-    const modalRange = document.getElementById("modalRange");
-    const closeModalBtn = document.getElementById("closeModalBtn");
+  const filtered = products.filter(item => {
+    const matchCategory = category === "全部" || item.category === category;
 
-    function renderProducts() {
-      const q = searchInput.value.trim().toLowerCase();
-      const category = categorySelect.value;
+    const searchText = [
+      item.name || "",
+      item.cnName || "",
+      item.category || "",
+      item.tasting || "",
+      ...(item.variants
+        ? item.variants.flatMap(v => [v.label, ...(v.specs || [])])
+        : item.specs || [])
+    ].join(" ").toLowerCase();
 
-      const filtered = products.filter(item => {
-        const matchCategory = category === "全部" || item.category === category;
-        const matchQuery =
-          !q ||
-          item.name.toLowerCase().includes(q) ||
-          item.cnName.toLowerCase().includes(q) ||
-          item.category.toLowerCase().includes(q) ||
-          item.specs.join(" ").toLowerCase().includes(q);
+    const matchQuery = !q || searchText.includes(q);
 
-        return matchCategory && matchQuery;
-      });
+    return matchCategory && matchQuery;
+  });
 
-      productGrid.innerHTML = filtered.map(item => `
-        <div class="card">
-          <div class="card-image-wrap">
-            <img class="card-image" src="${item.image}" alt="${item.name}">
-            <div class="badge">${item.badge}</div>
-            ${item.soldOut ? '<div class="soldout">已售罄</div>' : ''}
-          </div>
-          <div class="card-body">
-            <div class="card-title">${item.name}</div>
-            <div class="card-subtitle">${item.cnName}</div>
+  productGrid.innerHTML = filtered.map(item => {
+    const defaultVariant = item.variants ? item.variants[0] : item;
 
-            <div class="price-row">
-              <div>
-                <div class="price">${item.price}</div>
-                <div class="price-note">${item.priceNote}</div>
-              </div>
-              <div class="category">${item.category}</div>
-            </div>
-
-            <div class="specs">
-              ${item.specs.map(spec => `<span class="spec">${spec}</span>`).join("")}
-            </div>
-
-            <div class="range-box">
-              <div class="range-label">价格区间</div>
-              <div class="range-value">${item.range}</div>
-            </div>
-
-            <button class="detail-btn" onclick="openModal(${item.id})">点击查看详情</button>
-          </div>
+    return `
+      <div class="card" id="product-card-${item.id}">
+        <div class="card-image-wrap">
+          <img class="card-image" id="card-image-${item.id}" src="${defaultVariant.image}" alt="${item.name}">
+          <div class="badge">${item.badge || ""}</div>
+          ${defaultVariant.soldOut ? '<div class="soldout">已售罄</div>' : ''}
         </div>
-      `).join("");
-    }
+        <div class="card-body">
+          <div class="card-title">${item.name}</div>
+          <div class="card-subtitle">${item.cnName}</div>
 
+          ${
+            item.variants
+              ? `<div class="specs" style="margin-top:12px;">
+                  ${item.variants.map((v, i) => `
+                    <button
+                      class="spec"
+                      style="cursor:pointer; border:none; ${i === 0 ? 'background:#c89a71; color:#1b1110;' : ''}"
+                      onclick="switchVariant(${item.id}, ${i})"
+                    >${v.label}</button>
+                  `).join("")}
+                </div>`
+              : ""
+          }
+
+          <div class="price-row">
+            <div>
+              <div class="price" id="card-price-${item.id}">${defaultVariant.price}</div>
+              <div class="price-note" id="card-price-note-${item.id}">${defaultVariant.priceNote}</div>
+            </div>
+            <div class="category">${item.category}</div>
+          </div>
+
+          <div class="specs" id="card-specs-${item.id}">
+            ${(defaultVariant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("")}
+          </div>
+
+          <div class="range-box">
+            <div class="range-label">价格区间</div>
+            <div class="range-value" id="card-range-${item.id}">${defaultVariant.range}</div>
+          </div>
+
+          <button class="detail-btn" onclick="openModal(${item.id})">点击查看详情</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+function switchVariant(productId, variantIndex) {
+  const item = products.find(p => p.id === productId);
+  if (!item || !item.variants) return;
+
+  const variant = item.variants[variantIndex];
+
+  document.getElementById(`card-image-${productId}`).src = variant.image;
+  document.getElementById(`card-price-${productId}`).textContent = variant.price;
+  document.getElementById(`card-price-note-${productId}`).textContent = variant.priceNote;
+  document.getElementById(`card-range-${productId}`).textContent = variant.range;
+  document.getElementById(`card-specs-${productId}`).innerHTML =
+    variant.specs.map(spec => `<span class="spec">${spec}</span>`).join("");
+
+  const card = document.getElementById(`product-card-${productId}`);
+  const soldoutOld = card.querySelector('.soldout');
+  if (soldoutOld) soldoutOld.remove();
+
+  if (variant.soldOut) {
+    const imageWrap = card.querySelector('.card-image-wrap');
+    imageWrap.insertAdjacentHTML('beforeend', '<div class="soldout">已售罄</div>');
+  }
+}
     function renderTastingCards() {
       tasteGrid.innerHTML = products.slice(0, 3).map(item => `
         <div class="box">

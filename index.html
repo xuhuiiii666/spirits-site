@@ -923,6 +923,21 @@ const products = [
    range: "建议零售价：¥1398"
     },
 ];
+const productGrid = document.getElementById("productGrid");
+const tasteGrid = document.getElementById("tasteGrid");
+const searchInput = document.getElementById("searchInput");
+const categorySelect = document.getElementById("categorySelect");
+
+const modal = document.getElementById("productModal");
+const modalImage = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalSubtitle = document.getElementById("modalSubtitle");
+const modalPrice = document.getElementById("modalPrice");
+const modalPriceNote = document.getElementById("modalPriceNote");
+const modalSpecs = document.getElementById("modalSpecs");
+const modalTasting = document.getElementById("modalTasting");
+const modalRange = document.getElementById("modalRange");
+const closeModalBtn = document.getElementById("closeModalBtn");
 
 function renderProducts() {
   const q = searchInput.value.trim().toLowerCase();

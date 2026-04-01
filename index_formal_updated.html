@@ -1,0 +1,1949 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>精品烈酒展示 | ROYAL HORSE</title>
+  <meta name="description" content="ROYAL HORSE 精品烈酒展示网站，支持产品展示、建议售价、规格切换、售罄状态与商务咨询。" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: #1b1110;
+      color: #f4e8dd;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(28, 18, 16, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      gap: 12px;
+    }
+    .brand-small {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #caa786;
+    }
+    .brand-name {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .nav {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      color: #d8c3b4;
+    }
+    .nav a:hover { color: #fff; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 40% 10%, rgba(187,141,100,0.25), transparent 32%),
+        linear-gradient(135deg, #2d1c19 0%, #1b1110 55%, #100908 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      min-height: 430px;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(90deg, rgba(27,17,16,0.95) 0%, rgba(27,17,16,0.72) 33%, rgba(27,17,16,0.28) 58%, rgba(27,17,16,0.92) 100%),
+        url('./beijingchangtu.JPG') center right / cover no-repeat;
+      opacity: 0.95;
+      mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 28%, rgba(0,0,0,0.78) 55%, rgba(0,0,0,0.95) 100%);
+      -webkit-mask-image: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.95) 28%, rgba(0,0,0,0.78) 55%, rgba(0,0,0,0.95) 100%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 1;
+      padding: 68px 0 56px;
+      display: grid;
+      gap: 24px;
+      align-items: center;
+    }
+    .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(202,167,134,0.10);
+      border: 1px solid rgba(202,167,134,0.24);
+      color: #dbc1aa;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 42px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: #e1d2c7;
+      max-width: 760px;
+      font-size: 16px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #c89a71;
+      color: #1b1110;
+      border: none;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+    }
+
+    .section { padding: 42px 0; }
+    .section-title-small {
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #caa786;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      color: #d1beb1;
+      font-size: 14px;
+    }
+
+    .toolbar {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+    }
+    .search, .select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      border-radius: 16px;
+      padding: 13px 14px;
+      font-size: 14px;
+      outline: none;
+    }
+    .select option {
+      color: #fff;
+      background: #241715;
+    }
+
+    .grid {
+      margin-top: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: #291b19;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+    .card-image-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: #f3ede7;
+      overflow: hidden;
+    }
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: rgba(29,17,16,0.82);
+      color: #f4d8be;
+    }
+    .soldout {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #efe7df;
+      color: #5d463f;
+      font-weight: 700;
+    }
+    .card-body { padding: 18px; }
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .card-subtitle {
+      margin-top: 4px;
+      color: #d8c4b7;
+      font-size: 14px;
+    }
+    .price-row {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+    }
+    .price {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ebc8a6;
+      line-height: 1;
+    }
+    .price-note {
+      font-size: 12px;
+      color: #af9a8d;
+      margin-top: 6px;
+    }
+    .category {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #d4bfb2;
+      white-space: nowrap;
+    }
+    .specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .spec {
+      font-size: 12px;
+      color: #d8c6b9;
+      background: rgba(255,255,255,0.04);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .variant-btn, .modal-variant-btn {
+      cursor: pointer;
+      border: none;
+      font-size: 12px;
+      color: #d8c6b9;
+      background: rgba(255,255,255,0.04);
+      padding: 8px 12px;
+      border-radius: 999px;
+    }
+    .variant-btn.is-active, .modal-variant-btn.is-active {
+      background: #c89a71;
+      color: #1b1110;
+    }
+    .range-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .range-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c3a289;
+    }
+    .range-value {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #f3e8de;
+    }
+    .detail-btn {
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: #1d1311;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .about-grid, .contact-grid, .taste-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 20px;
+    }
+    .box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+    }
+    .box h3 { font-size: 18px; margin-bottom: 8px; }
+    .box p { font-size: 14px; color: #d8c5b8; }
+
+    .contact-item { margin-bottom: 16px; }
+    .contact-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c3a289;
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      padding: 28px 0 42px;
+      color: #a78f82;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 18px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.76);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal.show { display: flex; }
+    .modal-inner {
+      width: 100%;
+      max-width: 980px;
+      max-height: 92vh;
+      overflow: auto;
+      background: #201514;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .modal-grid { display: grid; }
+    .modal-image-wrap { background: #f3ede7; }
+    .modal-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      aspect-ratio: 1 / 1;
+    }
+    .modal-content { padding: 20px; }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+    .close-btn {
+      background: transparent;
+      color: #d7c4b7;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .modal-price {
+      margin-top: 16px;
+      font-size: 32px;
+      color: #ebc8a6;
+      font-weight: 700;
+    }
+    .modal-note {
+      color: #b69f90;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .modal-block {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .modal-block-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #c3a289;
+      margin-bottom: 8px;
+    }
+    .modal-block p {
+      color: #f2e8de;
+      font-size: 14px;
+    }
+    .soldout-btn {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 999px;
+      background: #5a4a45;
+      color: #f2e8de;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: not-allowed;
+    }
+
+    @media (min-width: 760px) {
+      .hero-inner {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      .toolbar {
+        grid-template-columns: 1fr 180px;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .about-grid, .taste-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      .modal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 1100px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .taste-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav { display: none; }
+      .hero h1 { font-size: 32px; }
+      .section-title { font-size: 26px; }
+      .hero::after { background-position: center right; }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="./皇马logo-transparent.png" alt="Royal Horse" style="width:56px; height:56px; object-fit:contain;" />
+        <div>
+          <div class="brand-small">Fine Spirits Selection</div>
+          <div class="brand-name">ROYAL HORSE</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#products">产品</a>
+        <a href="#about">品牌</a>
+        <a href="#tasting">品鉴</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-inner">
+      <div>
+        <div class="tag">Royal Horse Premium Selection</div>
+        <h1>ROYAL HORSE 精品烈酒选品</h1>
+        <p>
+          面向礼赠、宴席、陈列与商务接待场景，集中展示 ROYAL HORSE 当前主推的威士忌、白兰地、陶瓷大规格酒款与酱香白酒系列。页面价格统一采用建议售价，详情页默认展示售罄状态，用于建立品牌展示与沟通效率。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#products">查看产品</a>
+          <a class="btn btn-secondary" href="#contact">联系咨询</a>
+        </div>
+      </div>
+      <div class="box">
+        <h3>商务展示说明</h3>
+        <p>本页用于品牌展示、规格梳理与建议售价陈列。多规格产品已合并至单一产品卡片，点击规格可切换不同容量与对应建议售价；购买按钮统一显示为“已售罄”，避免前端展示与实际库存状态不一致。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-title-small">Online Selection</div>
+      <div class="section-title">产品列表</div>
+      <div class="section-desc">支持搜索、分类筛选、规格切换与详情弹窗查看。</div>
+
+      <div class="toolbar">
+        <input id="searchInput" class="search" placeholder="搜索产品名 / 品牌 / 规格" />
+        <select id="categorySelect" class="select">
+          <option value="全部">全部</option>
+          <option value="Whisky">Whisky</option>
+          <option value="Brandy">Brandy</option>
+          <option value="Ceramic">Ceramic</option>
+          <option value="Baijiu">Baijiu</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div id="productGrid" class="grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="about" style="background:#241715; border-top:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div class="container">
+      <div class="section-title-small">Brand Story</div>
+      <div class="section-title">品牌介绍</div>
+      <div class="section-desc">ROYAL HORSE 致力于服务礼赠、宴席、展示与商务接待场景，通过更直观的规格整理与统一展示，帮助终端客户快速理解产品层级与主推方向。</div>
+
+      <div class="about-grid">
+        <div class="box">
+          <h3>品牌定位</h3>
+          <p>围绕威士忌、白兰地 XO、礼盒酒款、陶瓷大规格酒款与酱香白酒，形成适合门店陈列、礼赠配货与商务展示的选品结构。</p>
+        </div>
+        <div class="box">
+          <h3>页面逻辑</h3>
+          <p>相同产品的不同规格已统一收纳至同一产品卡片，点击规格即可查看不同容量的建议售价与参数，减少页面冗余并提升客户浏览效率。</p>
+        </div>
+        <div class="box">
+          <h3>图片规范</h3>
+          <p>本页已统一预留产品图片命名格式：product-001.jpg、product-002.jpg……后续只需按编号上传，即可逐步替换占位图为正式产品图。</p>
+        </div>
+        <div class="box">
+          <h3>后续可扩展</h3>
+          <p>后续可继续接入品牌长图、微信二维码、分系列专题页、单独礼盒页与更完整的招商信息模块。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tasting">
+    <div class="container">
+      <div class="section-title-small">Selection Notes</div>
+      <div class="section-title">选品提示</div>
+      <div class="taste-grid" id="tasteGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="background:#1a1110; border-top:1px solid rgba(255,255,255,0.08);">
+    <div class="container">
+      <div class="section-title-small">Contact</div>
+      <div class="section-title">联系咨询</div>
+      <div class="contact-grid">
+        <div class="box">
+          <h3>合作说明</h3>
+          <p>支持批量采购、节庆配货、宴席酒水搭配、礼盒产品咨询与终端展示合作。若需确认到货周期、可供规格与定制陈列方案，请通过下方联系方式直接沟通。</p>
+        </div>
+        <div class="box">
+          <div class="contact-item">
+            <div class="contact-label">电话</div>
+            <div>请替换为实际电话</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">微信</div>
+            <div>请替换为实际微信号</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">邮箱</div>
+            <div>请替换为实际邮箱</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 ROYAL HORSE · Fine Spirits Selection
+    </div>
+  </footer>
+
+  <div class="modal" id="productModal">
+    <div class="modal-inner">
+      <div class="modal-grid">
+        <div class="modal-image-wrap">
+          <img id="modalImage" class="modal-image" src="" alt="" />
+        </div>
+        <div class="modal-content">
+          <div class="modal-top">
+            <div>
+              <div id="modalTitle" class="card-title"></div>
+              <div id="modalSubtitle" class="card-subtitle"></div>
+            </div>
+            <button class="close-btn" id="closeModalBtn">关闭</button>
+          </div>
+
+          <div id="modalPrice" class="modal-price"></div>
+          <div id="modalPriceNote" class="modal-note"></div>
+          <div id="modalSpecs" class="specs"></div>
+
+          <div class="modal-block">
+            <div class="modal-block-title">选品说明</div>
+            <p id="modalTasting"></p>
+          </div>
+
+          <div class="modal-block">
+            <div class="modal-block-title">风味走向</div>
+            <p id="modalRange"></p>
+          </div>
+
+          <div id="modalVariantBox"></div>
+          <div id="modalBuyBox"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const products = [
+  {
+    "id": 1,
+    "section": "威士忌系列",
+    "category": "Whisky",
+    "name": "格兰皇 调和威士忌12",
+    "cnName": "格兰皇 · 威士忌系列",
+    "brand": "格兰皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥880",
+        "priceNote": "建议售价",
+        "image": "./product-001.jpg",
+        "specs": [
+          "苏格兰 高地",
+          "700ml",
+          "40.5%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "section": "威士忌系列",
+    "category": "Whisky",
+    "name": "格兰皇 纯麦威士忌21",
+    "cnName": "格兰皇 · 威士忌系列",
+    "brand": "格兰皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1680",
+        "priceNote": "建议售价",
+        "image": "./product-002.jpg",
+        "specs": [
+          "苏格兰 高地",
+          "700ml",
+          "40.5%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "section": "威士忌系列",
+    "category": "Whisky",
+    "name": "格兰皇 纯麦威士忌23",
+    "cnName": "格兰皇 · 威士忌系列",
+    "brand": "格兰皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1980",
+        "priceNote": "建议售价",
+        "image": "./product-003.jpg",
+        "specs": [
+          "苏格兰 高地",
+          "700ml",
+          "40.5%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 4,
+    "section": "威士忌系列",
+    "category": "Whisky",
+    "name": "格兰皇 纯麦威士忌25",
+    "cnName": "格兰皇 · 威士忌系列",
+    "brand": "格兰皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥2380",
+        "priceNote": "建议售价",
+        "image": "./product-004.jpg",
+        "specs": [
+          "苏格兰 高地",
+          "700ml",
+          "40.5%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 5,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "帝仕VSOP",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "清甜花香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "待定",
+        "priceNote": "建议售价",
+        "image": "./product-005.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "待定",
+        "priceNote": "建议售价",
+        "image": "./product-005.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 6,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "帝仕XO",
+    "cnName": " · 白兰地XO系列",
+    "brand": "",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "3L",
+        "price": "¥2880",
+        "priceNote": "建议售价",
+        "image": "./product-006.jpg",
+        "specs": [
+          "3L"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 7,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "爵仕VSOP",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "清甜花香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "待定",
+        "priceNote": "建议售价",
+        "image": "./product-007.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 8,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "新典XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥880",
+        "priceNote": "建议售价",
+        "image": "./product-008.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 9,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "雅典XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥880",
+        "priceNote": "建议售价",
+        "image": "./product-009.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 10,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "金路易XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥988",
+        "priceNote": "建议售价",
+        "image": "./product-010.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-010.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1.5L",
+        "price": "¥2888",
+        "priceNote": "建议售价",
+        "image": "./product-010.jpg",
+        "specs": [
+          "法国",
+          "1.5L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 11,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "银尊XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-011.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1.5L",
+        "price": "¥2888",
+        "priceNote": "建议售价",
+        "image": "./product-011.jpg",
+        "specs": [
+          "法国",
+          "1.5L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 12,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "皇冠XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-012.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1.5L",
+        "price": "¥2888",
+        "priceNote": "建议售价",
+        "image": "./product-012.jpg",
+        "specs": [
+          "法国",
+          "1.5L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 13,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "经典XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1388",
+        "priceNote": "建议售价",
+        "image": "./product-013.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 14,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "皇马XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-014.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥1680",
+        "priceNote": "建议售价",
+        "image": "./product-014.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "3L",
+        "price": "¥4280",
+        "priceNote": "建议售价",
+        "image": "./product-014.jpg",
+        "specs": [
+          "法国",
+          "3L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 15,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "蓝马雅邑 XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "深邃花香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1988",
+        "priceNote": "建议售价",
+        "image": "./product-015.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 16,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "欧邑XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1988",
+        "priceNote": "建议售价",
+        "image": "./product-016.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 17,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "尚邑XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1380",
+        "priceNote": "建议售价",
+        "image": "./product-017.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 18,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "名邑XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1388",
+        "priceNote": "建议售价",
+        "image": "./product-018.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 19,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "皇马雅邑 XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "深邃花香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1880",
+        "priceNote": "建议售价",
+        "image": "./product-019.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥2280",
+        "priceNote": "建议售价",
+        "image": "./product-019.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 20,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "尊邑XO",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1880",
+        "priceNote": "建议售价",
+        "image": "./product-020.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 21,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "皇马XO （红）",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-021.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥1680",
+        "priceNote": "建议售价",
+        "image": "./product-021.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 22,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "皇马XO （黑）",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-022.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥1680",
+        "priceNote": "建议售价",
+        "image": "./product-022.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 23,
+    "section": "白兰地XO系列",
+    "category": "Brandy",
+    "name": "皇马XO （金）",
+    "cnName": "皇马 · 白兰地XO系列",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-023.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥1680",
+        "priceNote": "建议售价",
+        "image": "./product-023.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 24,
+    "section": "白兰地XO礼盒",
+    "category": "Brandy",
+    "name": "皇马雅邑 XO礼盒",
+    "cnName": "皇马 · 白兰地XO礼盒",
+    "brand": "皇马",
+    "profile": "深邃花香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥2280",
+        "priceNote": "建议售价",
+        "image": "./product-024.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 25,
+    "section": "白兰地XO礼盒",
+    "category": "Brandy",
+    "name": "皇马XO 礼盒",
+    "cnName": "皇马 · 白兰地XO礼盒",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-025.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "1L",
+        "price": "¥1680",
+        "priceNote": "建议售价",
+        "image": "./product-025.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 26,
+    "section": "白兰地XO礼盒",
+    "category": "Brandy",
+    "name": "金路易XO 礼盒",
+    "cnName": "皇马 · 白兰地XO礼盒",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "700ml",
+        "price": "¥988",
+        "priceNote": "建议售价",
+        "image": "./product-026.jpg",
+        "specs": [
+          "法国",
+          "700ml",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 27,
+    "section": "白兰地XO礼盒",
+    "category": "Brandy",
+    "name": "皇冠XO 礼盒",
+    "cnName": "皇马 · 白兰地XO礼盒",
+    "brand": "皇马",
+    "profile": "圆润花果",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "1L",
+        "price": "¥1280",
+        "priceNote": "建议售价",
+        "image": "./product-027.jpg",
+        "specs": [
+          "法国",
+          "1L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 28,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "路易尊皇 XO （蓝马）",
+    "cnName": "路易尊皇 · 陶瓷瓶XO/威士忌",
+    "brand": "路易尊皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "3L",
+        "price": "¥8800",
+        "priceNote": "建议售价",
+        "image": "./product-028.jpg",
+        "specs": [
+          "中国",
+          "3L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 29,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "格兰皇 威士忌（白马）",
+    "cnName": "格兰皇 · 陶瓷瓶XO/威士忌",
+    "brand": "格兰皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "3L",
+        "price": "¥8800",
+        "priceNote": "建议售价",
+        "image": "./product-029.jpg",
+        "specs": [
+          "中国",
+          "3L",
+          "40.5%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 30,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "路易尊皇 XO （蓝帆）",
+    "cnName": "路易尊皇 · 陶瓷瓶XO/威士忌",
+    "brand": "路易尊皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "4L",
+        "price": "¥7800",
+        "priceNote": "建议售价",
+        "image": "./product-030.jpg",
+        "specs": [
+          "中国",
+          "4L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 31,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "格兰皇 威士忌(白帆）",
+    "cnName": "格兰皇 · 陶瓷瓶XO/威士忌",
+    "brand": "格兰皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "4L",
+        "price": "¥7800",
+        "priceNote": "建议售价",
+        "image": "./product-031.jpg",
+        "specs": [
+          "中国",
+          "4L",
+          "40.5%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 32,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "路易尊皇 XO（910）",
+    "cnName": "路易尊皇 · 陶瓷瓶XO/威士忌",
+    "brand": "路易尊皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "6L",
+        "price": "¥6800",
+        "priceNote": "建议售价",
+        "image": "./product-032.jpg",
+        "specs": [
+          "中国",
+          "6L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "10L",
+        "price": "¥9800",
+        "priceNote": "建议售价",
+        "image": "./product-032.jpg",
+        "specs": [
+          "中国",
+          "10L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "18L",
+        "price": "¥13800",
+        "priceNote": "建议售价",
+        "image": "./product-032.jpg",
+        "specs": [
+          "中国",
+          "18L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 33,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "路易尊皇 XO（909）",
+    "cnName": "路易尊皇 · 陶瓷瓶XO/威士忌",
+    "brand": "路易尊皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "6L",
+        "price": "¥6800",
+        "priceNote": "建议售价",
+        "image": "./product-033.jpg",
+        "specs": [
+          "中国",
+          "6L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "12L",
+        "price": "¥9800",
+        "priceNote": "建议售价",
+        "image": "./product-033.jpg",
+        "specs": [
+          "中国",
+          "12L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "25L",
+        "price": "¥15800",
+        "priceNote": "建议售价",
+        "image": "./product-033.jpg",
+        "specs": [
+          "中国",
+          "25L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 34,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "路易尊皇 XO （皇）",
+    "cnName": "路易尊皇 · 陶瓷瓶XO/威士忌",
+    "brand": "路易尊皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "6L",
+        "price": "¥6800",
+        "priceNote": "建议售价",
+        "image": "./product-034.jpg",
+        "specs": [
+          "中国",
+          "6L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "12L",
+        "price": "¥9800",
+        "priceNote": "建议售价",
+        "image": "./product-034.jpg",
+        "specs": [
+          "中国",
+          "12L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 35,
+    "section": "陶瓷瓶XO/威士忌",
+    "category": "Ceramic",
+    "name": "路易尊皇 XO （金）",
+    "cnName": "路易尊皇 · 陶瓷瓶XO/威士忌",
+    "brand": "路易尊皇",
+    "profile": "麦芽木香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "6L",
+        "price": "¥6800",
+        "priceNote": "建议售价",
+        "image": "./product-035.jpg",
+        "specs": [
+          "中国",
+          "6L",
+          "40%vol"
+        ]
+      },
+      {
+        "label": "12L",
+        "price": "¥9800",
+        "priceNote": "建议售价",
+        "image": "./product-035.jpg",
+        "specs": [
+          "中国",
+          "12L",
+          "40%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 36,
+    "section": "中国茅台白酒",
+    "category": "Baijiu",
+    "name": "醉美酱酒 6",
+    "cnName": "皇马醉美 · 中国茅台白酒",
+    "brand": "皇马醉美",
+    "profile": "酱香陈香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "500ml",
+        "price": "¥888",
+        "priceNote": "建议售价",
+        "image": "./product-036.jpg",
+        "specs": [
+          "中国",
+          "500ml",
+          "53%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 37,
+    "section": "中国茅台白酒",
+    "category": "Baijiu",
+    "name": "醉美酱酒 8",
+    "cnName": "皇马醉美 · 中国茅台白酒",
+    "brand": "皇马醉美",
+    "profile": "酱香陈香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "500ml",
+        "price": "¥1288",
+        "priceNote": "建议售价",
+        "image": "./product-037.jpg",
+        "specs": [
+          "中国",
+          "500ml",
+          "53%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 38,
+    "section": "中国茅台白酒",
+    "category": "Baijiu",
+    "name": "醉美酱酒 12",
+    "cnName": "皇马醉美 · 中国茅台白酒",
+    "brand": "皇马醉美",
+    "profile": "酱香陈香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "500ml",
+        "price": "¥1688",
+        "priceNote": "建议售价",
+        "image": "./product-038.jpg",
+        "specs": [
+          "中国",
+          "500ml",
+          "53%vol"
+        ]
+      }
+    ]
+  },
+  {
+    "id": 39,
+    "section": "中国茅台白酒",
+    "category": "Baijiu",
+    "name": "醉美酱酒 20",
+    "cnName": "皇马醉美 · 中国茅台白酒",
+    "brand": "皇马醉美",
+    "profile": "酱香陈香",
+    "soldOut": true,
+    "variants": [
+      {
+        "label": "500ml",
+        "price": "¥2888",
+        "priceNote": "建议售价",
+        "image": "./product-039.jpg",
+        "specs": [
+          "中国",
+          "500ml",
+          "53%vol"
+        ]
+      }
+    ]
+  }
+];
+
+    const productGrid = document.getElementById("productGrid");
+    const tasteGrid = document.getElementById("tasteGrid");
+    const searchInput = document.getElementById("searchInput");
+    const categorySelect = document.getElementById("categorySelect");
+
+    const modal = document.getElementById("productModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalTitle = document.getElementById("modalTitle");
+    const modalSubtitle = document.getElementById("modalSubtitle");
+    const modalPrice = document.getElementById("modalPrice");
+    const modalPriceNote = document.getElementById("modalPriceNote");
+    const modalSpecs = document.getElementById("modalSpecs");
+    const modalTasting = document.getElementById("modalTasting");
+    const modalRange = document.getElementById("modalRange");
+    const closeModalBtn = document.getElementById("closeModalBtn");
+
+    function placeholderSvg(title) {
+      const safe = String(title || 'ROYAL HORSE').replace(/[&<>"]/g, '');
+      return `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(`
+        <svg xmlns="http://www.w3.org/2000/svg" width="900" height="900" viewBox="0 0 900 900">
+          <rect width="100%" height="100%" fill="#f3ede7"/>
+          <circle cx="450" cy="300" r="85" fill="#d4c9bf"/>
+          <rect x="280" y="445" width="340" height="28" rx="14" fill="#b9aa9f"/>
+          <rect x="330" y="495" width="240" height="20" rx="10" fill="#c7b8ad"/>
+          <text x="450" y="630" text-anchor="middle" fill="#69564b" font-family="Arial, sans-serif" font-size="58" font-weight="700">ROYAL HORSE</text>
+          <text x="450" y="705" text-anchor="middle" fill="#8d7b70" font-family="Arial, sans-serif" font-size="32">${safe}</text>
+        </svg>
+      `)}`;
+    }
+
+    function imageTag(src, alt, extraId = '') {
+      const idAttr = extraId ? ` id="${extraId}"` : '';
+      return `<img${idAttr} class="card-image" src="${src}" alt="${alt}" onerror="this.onerror=null;this.src=placeholderSvg('${String(alt).replace(/'/g, "\\'")}');">`;
+    }
+
+    function renderProducts() {
+      const q = searchInput.value.trim().toLowerCase();
+      const category = categorySelect.value;
+
+      const filtered = products.filter(item => {
+        const matchCategory = category === "全部" || item.category === category;
+        const searchText = [
+          item.name || "",
+          item.cnName || "",
+          item.category || "",
+          item.brand || "",
+          item.section || "",
+          item.profile || "",
+          ...(item.variants ? item.variants.flatMap(v => [v.label, ...(v.specs || [])]) : [])
+        ].join(" ").toLowerCase();
+
+        return matchCategory && (!q || searchText.includes(q));
+      });
+
+      productGrid.innerHTML = filtered.map(item => {
+        const defaultVariant = item.variants[0];
+        const hasVariants = item.variants.length > 1;
+
+        return `
+          <div class="card" id="product-card-${item.id}">
+            <div class="card-image-wrap">
+              ${imageTag(defaultVariant.image, item.name, `card-image-${item.id}`)}
+              <div class="badge">${item.badge || item.category}</div>
+              ${defaultVariant.soldOut || item.soldOut ? '<div class="soldout">已售罄</div>' : ''}
+            </div>
+            <div class="card-body">
+              <div class="card-title">${item.name}</div>
+              <div class="card-subtitle">${item.cnName}</div>
+
+              ${hasVariants ? `
+                <div class="specs" style="margin-top:12px;">
+                  ${item.variants.map((v, i) => `
+                    <button
+                      class="variant-btn${i === 0 ? ' is-active' : ''}"
+                      onclick="switchVariant(${item.id}, ${i})"
+                    >${v.label}</button>
+                  `).join("")}
+                </div>
+              ` : ''}
+
+              <div class="price-row">
+                <div>
+                  <div class="price" id="card-price-${item.id}">${defaultVariant.price}</div>
+                  <div class="price-note" id="card-price-note-${item.id}">${defaultVariant.priceNote}</div>
+                </div>
+                <div class="category">${item.category}</div>
+              </div>
+
+              <div class="specs" id="card-specs-${item.id}">
+                ${(defaultVariant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("")}
+              </div>
+
+              <div class="range-box">
+                <div class="range-label">风味走向</div>
+                <div class="range-value" id="card-range-${item.id}">${item.profile}</div>
+              </div>
+
+              <button class="detail-btn" onclick="openModal(${item.id})">点击查看详情</button>
+            </div>
+          </div>
+        `;
+      }).join("");
+    }
+
+    function switchVariant(productId, variantIndex) {
+      const item = products.find(p => p.id === productId);
+      if (!item || !item.variants) return;
+
+      const variant = item.variants[variantIndex];
+
+      const img = document.getElementById(`card-image-${productId}`);
+      img.src = variant.image;
+      img.alt = item.name;
+
+      document.getElementById(`card-price-${productId}`).textContent = variant.price;
+      document.getElementById(`card-price-note-${productId}`).textContent = variant.priceNote;
+      document.getElementById(`card-specs-${productId}`).innerHTML =
+        (variant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("");
+
+      const card = document.getElementById(`product-card-${productId}`);
+      const soldoutOld = card.querySelector('.soldout');
+      if (soldoutOld) soldoutOld.remove();
+
+      if (variant.soldOut || item.soldOut) {
+        const imageWrap = card.querySelector('.card-image-wrap');
+        imageWrap.insertAdjacentHTML('beforeend', '<div class="soldout">已售罄</div>');
+      }
+
+      const buttons = card.querySelectorAll('.variant-btn');
+      buttons.forEach((btn, index) => {
+        btn.classList.toggle('is-active', index === variantIndex);
+      });
+    }
+
+    function renderTastingCards() {
+      tasteGrid.innerHTML = products.slice(0, 6).map(item => `
+        <div class="box">
+          <h3>${item.name}</h3>
+          <p style="margin-bottom:8px; color:#cdb8aa;">${item.cnName}</p>
+          <p>系列：${item.section}。当前展示口径为建议售价与规格整理，适合礼赠、宴席、陈列和终端配货场景。</p>
+        </div>
+      `).join("");
+    }
+
+    function openModal(id) {
+      const item = products.find(p => p.id === id);
+      if (!item) return;
+
+      const variant = item.variants[0];
+
+      modalImage.src = variant.image;
+      modalImage.alt = item.name;
+      modalImage.onerror = function() {
+        this.onerror = null;
+        this.src = placeholderSvg(item.name);
+      };
+      modalTitle.textContent = item.name;
+      modalSubtitle.textContent = item.cnName;
+      modalPrice.textContent = variant.price;
+      modalPriceNote.textContent = variant.priceNote;
+      modalSpecs.innerHTML = (variant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("");
+      modalTasting.textContent = `系列：${item.section}。当前页面用于招商展示与产品浏览，具体供货与可售状态请以实际沟通为准。`;
+      modalRange.textContent = item.profile;
+
+      document.getElementById("modalVariantBox").innerHTML = item.variants.length > 1 ? `
+        <div class="modal-block">
+          <div class="modal-block-title">规格选择</div>
+          <div class="specs">
+            ${item.variants.map((v, i) => `
+              <button
+                class="modal-variant-btn${i === 0 ? ' is-active' : ''}"
+                onclick="switchModalVariant(${id}, ${i})"
+              >${v.label}</button>
+            `).join("")}
+          </div>
+        </div>
+      ` : "";
+
+      document.getElementById("modalBuyBox").innerHTML = `
+        <div class="modal-block">
+          <button class="soldout-btn">已售罄</button>
+        </div>
+      `;
+
+      modal.classList.add("show");
+    }
+
+    function switchModalVariant(productId, variantIndex) {
+      const item = products.find(p => p.id === productId);
+      if (!item || !item.variants) return;
+
+      const variant = item.variants[variantIndex];
+
+      modalImage.src = variant.image;
+      modalImage.alt = item.name;
+      modalImage.onerror = function() {
+        this.onerror = null;
+        this.src = placeholderSvg(item.name);
+      };
+      modalPrice.textContent = variant.price;
+      modalPriceNote.textContent = variant.priceNote;
+      modalSpecs.innerHTML = (variant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("");
+
+      const buttons = document.querySelectorAll('.modal-variant-btn');
+      buttons.forEach((btn, index) => {
+        btn.classList.toggle('is-active', index === variantIndex);
+      });
+    }
+
+    function closeModal() {
+      modal.classList.remove("show");
+    }
+
+    searchInput.addEventListener("input", renderProducts);
+    categorySelect.addEventListener("change", renderProducts);
+    closeModalBtn.addEventListener("click", closeModal);
+    modal.addEventListener("click", function(e) {
+      if (e.target === modal) closeModal();
+    });
+
+    renderProducts();
+    renderTastingCards();
+  </script>
+</body>
+</html>

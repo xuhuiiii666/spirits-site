@@ -1077,27 +1077,7 @@ function switchVariant(productId, variantIndex) {
     }
   });
 }
-  const item = products.find(p => p.id === productId);
-  if (!item || !item.variants) return;
-
-  const variant = item.variants[variantIndex];
-
-  document.getElementById(`card-image-${productId}`).src = variant.image;
-  document.getElementById(`card-price-${productId}`).textContent = variant.price;
-  document.getElementById(`card-price-note-${productId}`).textContent = variant.priceNote;
-  document.getElementById(`card-range-${productId}`).textContent = variant.range;
-  document.getElementById(`card-specs-${productId}`).innerHTML =
-    variant.specs.map(spec => `<span class="spec">${spec}</span>`).join("");
-
-  const card = document.getElementById(`product-card-${productId}`);
-  const soldoutOld = card.querySelector('.soldout');
-  if (soldoutOld) soldoutOld.remove();
-
-  if (variant.soldOut) {
-    const imageWrap = card.querySelector('.card-image-wrap');
-    imageWrap.insertAdjacentHTML('beforeend', '<div class="soldout">已售罄</div>');
-  }
-}
+  
     function renderTastingCards() {
       tasteGrid.innerHTML = products.slice(0, 3).map(item => `
         <div class="box">

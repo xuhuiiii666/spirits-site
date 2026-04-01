@@ -1,0 +1,1254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>精品烈酒展示 | ROYAL HORSE</title>
+  <meta name="description" content="ROYAL HORSE 精品烈酒展示网站，支持产品展示、多规格切换、风味走向展示、售罄状态与商务联系方式。" />
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
+      background: #1b1110;
+      color: #f4e8dd;
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    img { max-width: 100%; display: block; }
+    button { font: inherit; }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 16px;
+    }
+
+    .header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: rgba(28, 18, 16, 0.92);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+    }
+    .header-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      gap: 12px;
+    }
+    .brand-small {
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #caa786;
+    }
+    .brand-name {
+      font-size: 22px;
+      font-weight: 700;
+    }
+    .nav {
+      display: flex;
+      gap: 18px;
+      font-size: 14px;
+      color: #d8c3b4;
+    }
+    .nav a:hover { color: #fff; }
+
+    .hero {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at 48% 28%, rgba(187,141,100,0.28), transparent 22%),
+        linear-gradient(135deg, #2d1c19 0%, #1b1110 55%, #100908 100%);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      isolation: isolate;
+    }
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 70% 45%, rgba(202,154,113,0.12), transparent 30%),
+        linear-gradient(90deg, rgba(27,17,16,0.05), rgba(27,17,16,0.42));
+      pointer-events: none;
+      z-index: 0;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      padding: 56px 0 42px;
+      display: grid;
+      gap: 24px;
+    }
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+    .hero-art-wrap {
+      position: absolute;
+      right: 7%;
+      top: 48%;
+      transform: translateY(-50%);
+      width: min(36vw, 520px);
+      pointer-events: none;
+      opacity: 0.68;
+      z-index: 1;
+      filter: drop-shadow(0 24px 48px rgba(0,0,0,0.38));
+      -webkit-mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 36%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.3) 72%, rgba(0,0,0,0) 88%);
+      mask-image: radial-gradient(circle at center, rgba(0,0,0,1) 36%, rgba(0,0,0,0.88) 50%, rgba(0,0,0,0.3) 72%, rgba(0,0,0,0) 88%);
+    }
+    .hero-art {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      mix-blend-mode: screen;
+    }
+    .hero-side-box {
+      position: relative;
+      z-index: 2;
+      max-width: 520px;
+      justify-self: end;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 22px;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 18px 38px rgba(0,0,0,0.15);
+    }
+    .tag {
+      display: inline-block;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(202,167,134,0.10);
+      border: 1px solid rgba(202,167,134,0.24);
+      color: #dbc1aa;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .hero h1 {
+      font-size: 40px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero p {
+      color: #d7c4b7;
+      max-width: 760px;
+      font-size: 16px;
+    }
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 22px;
+    }
+    .btn {
+      padding: 12px 18px;
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 600;
+      border: 1px solid rgba(255,255,255,0.08);
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: #c89a71;
+      color: #1b1110;
+      border: none;
+    }
+    .btn-secondary {
+      background: transparent;
+      color: #fff;
+    }
+
+    .section {
+      padding: 42px 0;
+    }
+    .section-title-small {
+      font-size: 12px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: #caa786;
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      color: #d1beb1;
+      font-size: 14px;
+    }
+
+    .toolbar {
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+    }
+    .search,
+    .select {
+      width: 100%;
+      border: 1px solid rgba(255,255,255,0.1);
+      background: rgba(255,255,255,0.04);
+      color: #fff;
+      border-radius: 16px;
+      padding: 13px 14px;
+      font-size: 14px;
+      outline: none;
+    }
+    .select option {
+      color: #fff;
+      background: #241715;
+    }
+
+    .grid {
+      margin-top: 22px;
+      display: grid;
+      gap: 18px;
+    }
+
+    .card {
+      background: #291b19;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.12);
+    }
+    .card-image-wrap {
+      position: relative;
+      aspect-ratio: 1 / 1;
+      background: #f3ede7;
+      overflow: hidden;
+    }
+    .card-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: rgba(29,17,16,0.82);
+      color: #f4d8be;
+    }
+    .soldout {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      background: #efe7df;
+      color: #5d463f;
+      font-weight: 700;
+    }
+    .card-body {
+      padding: 18px;
+    }
+    .card-title {
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+    .card-subtitle {
+      margin-top: 4px;
+      color: #d8c4b7;
+      font-size: 14px;
+    }
+    .price-row {
+      margin-top: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: end;
+    }
+    .price {
+      font-size: 28px;
+      font-weight: 700;
+      color: #ebc8a6;
+      line-height: 1;
+    }
+    .price-note {
+      font-size: 12px;
+      color: #af9a8d;
+      margin-top: 6px;
+    }
+    .category {
+      border: 1px solid rgba(255,255,255,0.1);
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #d4bfb2;
+      white-space: nowrap;
+    }
+    .specs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .spec {
+      font-size: 12px;
+      color: #d8c6b9;
+      background: rgba(255,255,255,0.04);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .variant-btn,
+    .modal-variant-btn {
+      appearance: none;
+      border: none;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .variant-btn:hover,
+    .modal-variant-btn:hover {
+      background: rgba(255,255,255,0.11);
+    }
+    .range-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .range-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c3a289;
+    }
+    .range-value {
+      margin-top: 8px;
+      font-size: 14px;
+      color: #f3e8de;
+    }
+    .detail-btn,
+    .buy-btn-disabled {
+      margin-top: 16px;
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      background: #1d1311;
+      color: #fff;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .buy-btn-disabled {
+      cursor: not-allowed;
+      background: #5a4a45;
+      border: none;
+      font-weight: 700;
+    }
+
+    .about-grid,
+    .contact-grid,
+    .taste-grid {
+      display: grid;
+      gap: 18px;
+      margin-top: 20px;
+    }
+
+    .box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 18px;
+    }
+    .box h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+    .box p {
+      font-size: 14px;
+      color: #d8c5b8;
+    }
+
+    .contact-item {
+      margin-bottom: 16px;
+    }
+    .contact-label {
+      font-size: 12px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #c3a289;
+      margin-bottom: 4px;
+    }
+
+    .footer {
+      padding: 28px 0 42px;
+      color: #a78f82;
+      font-size: 13px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      margin-top: 18px;
+    }
+
+    .modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.76);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      z-index: 100;
+    }
+    .modal.show { display: flex; }
+    .modal-inner {
+      width: 100%;
+      max-width: 920px;
+      max-height: 92vh;
+      overflow: auto;
+      background: #201514;
+      border-radius: 24px;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+    .modal-grid {
+      display: grid;
+    }
+    .modal-image-wrap {
+      background: #f3ede7;
+    }
+    .modal-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .modal-content {
+      padding: 20px;
+    }
+    .modal-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: start;
+    }
+    .close-btn {
+      background: transparent;
+      color: #d7c4b7;
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 999px;
+      padding: 8px 12px;
+      cursor: pointer;
+    }
+    .modal-price {
+      margin-top: 16px;
+      font-size: 32px;
+      color: #ebc8a6;
+      font-weight: 700;
+    }
+    .modal-note {
+      color: #b69f90;
+      font-size: 13px;
+      margin-top: 4px;
+    }
+    .modal-block {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .modal-block-title {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: #c3a289;
+      margin-bottom: 8px;
+    }
+    .modal-block p {
+      color: #f2e8de;
+      font-size: 14px;
+    }
+
+    @media (min-width: 760px) {
+      .hero-inner {
+        grid-template-columns: 1.1fr 0.9fr;
+        align-items: center;
+        padding: 76px 0 56px;
+      }
+      .toolbar {
+        grid-template-columns: 1fr 180px;
+      }
+      .grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .about-grid,
+      .taste-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .contact-grid {
+        grid-template-columns: 1.1fr 0.9fr;
+      }
+      .modal-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+      .taste-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 920px) {
+      .hero-art-wrap {
+        position: absolute;
+        right: 2%;
+        width: 44vw;
+        opacity: 0.4;
+      }
+      .hero-side-box {
+        justify-self: stretch;
+      }
+    }
+
+    @media (max-width: 680px) {
+      .nav { display: none; }
+      .hero h1 { font-size: 32px; }
+      .section-title { font-size: 26px; }
+      .hero-inner { padding-top: 46px; }
+      .hero-art-wrap {
+        width: 64vw;
+        right: -8%;
+        top: 40%;
+        opacity: 0.25;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="container header-inner">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <img src="./皇马logo-transparent.png" alt="Royal Horse" style="width:56px; height:56px; object-fit:contain;" onerror="this.style.display='none'" />
+        <div>
+          <div class="brand-small">Fine Spirits Selection</div>
+          <div class="brand-name">ROYAL HORSE</div>
+        </div>
+      </div>
+      <nav class="nav">
+        <a href="#products">产品</a>
+        <a href="#about">品牌</a>
+        <a href="#tasting">品鉴</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="hero-art-wrap">
+      <img src="./皇马logo-transparent.png" alt="Royal Horse Hero" class="hero-art" onerror="this.style.display='none'" />
+    </div>
+    <div class="container hero-inner">
+      <div class="hero-copy">
+        <div class="tag">Mobile First / Fine Spirits</div>
+        <h1>ROYAL HORSE 精选烈酒陈列</h1>
+        <p>
+          面向礼赠、宴席、陈列与收藏型消费场景，强调完整包装、视觉气质与价格锚点表达。当前页面用于展示在售酒款、规格结构、风味走向与商务咨询信息。
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#products">查看产品</a>
+          <a class="btn btn-secondary" href="#contact">联系咨询</a>
+        </div>
+      </div>
+      <div class="hero-side-box">
+        <h3>适用场景</h3>
+        <p>适合门店陈列、节礼赠送、商务接待、宴席布置与高客单价终端展示。页面支持多规格切换、风味方向展示与售罄状态统一表达。</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="container">
+      <div class="section-title-small">Online Selection</div>
+      <div class="section-title">产品列表</div>
+      <div class="section-desc">支持搜索、筛选、多规格切换与详情弹窗查看。</div>
+
+      <div class="toolbar">
+        <input id="searchInput" class="search" placeholder="搜索产品名 / 中文名 / 规格" />
+        <select id="categorySelect" class="select">
+          <option value="全部">全部</option>
+          <option value="Whisky">Whisky</option>
+          <option value="Brandy">Brandy</option>
+          <option value="Rum">Rum</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      <div id="productGrid" class="grid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="about" style="background:#241715; border-top:1px solid rgba(255,255,255,0.08); border-bottom:1px solid rgba(255,255,255,0.08);">
+    <div class="container">
+      <div class="section-title-small">Brand Story</div>
+      <div class="section-title">品牌介绍</div>
+      <div class="section-desc">以下内容已经改成更正式的商务网站口径，后续可继续替换为你的最终品牌文案。</div>
+
+      <div class="about-grid">
+        <div class="box">
+          <h3>品牌定位</h3>
+          <p>ROYAL HORSE 以进口烈酒的展示价值、礼赠属性与终端气质为核心，强调整套包装、陈列效果与消费场景适配度，而非单纯参数表达。</p>
+        </div>
+        <div class="box">
+          <h3>选品逻辑</h3>
+          <p>围绕礼盒完成度、瓶型辨识度、终端展示效果与价格层级组织产品，适合用于高锚点陈列、节庆礼赠与宴席型消费场景。</p>
+        </div>
+        <div class="box">
+          <h3>页面用途</h3>
+          <p>本页面用于对外展示产品结构、条形码扫描价、风味方向、规格分层与售罄状态，便于客户快速浏览并进行商务咨询。</p>
+        </div>
+        <div class="box">
+          <h3>后续扩展</h3>
+          <p>后续可继续接入更多品牌系列、微信二维码、独立产品详情页与正式域名，用于搜索曝光与品牌沉淀。</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="tasting">
+    <div class="container">
+      <div class="section-title-small">Tasting Cards</div>
+      <div class="section-title">品鉴卡片</div>
+      <div class="taste-grid" id="tasteGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="contact" style="background:#1a1110; border-top:1px solid rgba(255,255,255,0.08);">
+    <div class="container">
+      <div class="section-title-small">Contact</div>
+      <div class="section-title">商务咨询</div>
+      <div class="contact-grid">
+        <div class="box">
+          <h3>咨询说明</h3>
+          <p>支持产品零售咨询、渠道合作、节礼赠方案、宴席用酒选品与批量供货沟通。当前页面价格仅作展示用途，具体合作方式请以商务沟通为准。</p>
+        </div>
+        <div class="box">
+          <div class="contact-item">
+            <div class="contact-label">商务电话</div>
+            <div>188-8888-8888</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">业务微信</div>
+            <div>royalhorse-sales</div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-label">联系邮箱</div>
+            <div>business@royalhorse.com</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      © 2026 ROYAL HORSE · Fine Spirits Selection
+    </div>
+  </footer>
+
+  <div class="modal" id="productModal">
+    <div class="modal-inner">
+      <div class="modal-grid">
+        <div class="modal-image-wrap">
+          <img id="modalImage" class="modal-image" src="" alt="" />
+        </div>
+        <div class="modal-content">
+          <div class="modal-top">
+            <div>
+              <div id="modalTitle" class="card-title"></div>
+              <div id="modalSubtitle" class="card-subtitle"></div>
+            </div>
+            <button class="close-btn" id="closeModalBtn">关闭</button>
+          </div>
+
+          <div id="modalPrice" class="modal-price"></div>
+          <div id="modalPriceNote" class="modal-note"></div>
+
+          <div id="modalSpecs" class="specs"></div>
+
+          <div class="modal-block">
+            <div class="modal-block-title">品鉴描述</div>
+            <p id="modalTasting"></p>
+          </div>
+
+          <div class="modal-block">
+            <div class="modal-block-title">风味走向</div>
+            <p id="modalRange"></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+const fallbackImage = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(`
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800">
+    <rect width="800" height="800" fill="#f3ede7"/>
+    <g fill="#8a6d5b">
+      <circle cx="400" cy="320" r="80" opacity="0.25"/>
+      <rect x="240" y="450" width="320" height="26" rx="13" opacity="0.55"/>
+      <rect x="285" y="500" width="230" height="22" rx="11" opacity="0.4"/>
+    </g>
+    <text x="400" y="620" text-anchor="middle" fill="#6a5146" font-size="36" font-family="Arial, sans-serif">ROYAL HORSE</text>
+  </svg>
+`);
+
+function imageOrFallback(src) {
+  return src || fallbackImage;
+}
+
+const products = [
+  {
+    id: 1,
+    name: "Galaking Blended Whisky 12",
+    cnName: "格兰皇 调和威士忌12",
+    category: "Whisky",
+    price: "¥880",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "威士忌",
+    image: fallbackImage,
+    specs: ["苏格兰高地", "格兰皇", "700ml*12", "40.5%vol"],
+    tasting: "格兰皇威士忌系列，适合展示、礼赠与基础宴席消费场景。",
+    range: "柔和麦芽"
+  },
+  {
+    id: 2,
+    name: "Galaking Pure Malt Whisky 21",
+    cnName: "格兰皇 纯麦威士忌21",
+    category: "Whisky",
+    price: "¥1680",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "威士忌",
+    image: fallbackImage,
+    specs: ["苏格兰高地", "格兰皇", "700ml*6", "40.5%vol"],
+    tasting: "格兰皇纯麦威士忌21，适合强调年份感与礼盒陈列感的消费场景。",
+    range: "坚果麦香"
+  },
+  {
+    id: 3,
+    name: "Galaking Pure Malt Whisky 23",
+    cnName: "格兰皇 纯麦威士忌23",
+    category: "Whisky",
+    price: "¥1980",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "威士忌",
+    image: fallbackImage,
+    specs: ["苏格兰高地", "格兰皇", "700ml*12", "40.5%vol"],
+    tasting: "格兰皇纯麦威士忌23，适合偏高端展示与礼赠场景。",
+    range: "成熟果香"
+  },
+  {
+    id: 4,
+    name: "Galaking Pure Malt Whisky 25",
+    cnName: "格兰皇 纯麦威士忌25",
+    category: "Whisky",
+    price: "¥2380",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "威士忌",
+    image: fallbackImage,
+    specs: ["苏格兰高地", "格兰皇", "700ml*12", "40.5%vol"],
+    tasting: "格兰皇纯麦威士忌25，定位更高，适合做价格锚点。",
+    range: "深色木香"
+  },
+  {
+    id: 5,
+    name: "Dishi VSOP",
+    cnName: "帝仕 VSOP",
+    category: "Brandy",
+    price: "暂无",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "白兰地",
+    image: fallbackImage,
+    specs: ["法国", "700ml*12", "40%vol"],
+    tasting: "帝仕VSOP，适合基础陈列与大众礼赠场景。",
+    range: "顺滑果香"
+  },
+  {
+    id: 6,
+    name: "Dishi VSOP 1L",
+    cnName: "帝仕 VSOP 1L",
+    category: "Brandy",
+    price: "暂无",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "白兰地",
+    image: fallbackImage,
+    specs: ["法国", "1L*6", "40%vol"],
+    tasting: "帝仕VSOP 1L装，规格更适合宴席与陈列型需求。",
+    range: "顺滑果香"
+  },
+  {
+    id: 7,
+    name: "Dishi XO 3L",
+    cnName: "帝仕 XO",
+    category: "Brandy",
+    price: "¥2880",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "XO",
+    image: fallbackImage,
+    specs: ["法国", "3L*4", "40%vol"],
+    tasting: "帝仕XO大规格，适合大场景陈列、宴席和礼品展示。",
+    range: "浓郁花果"
+  },
+  {
+    id: 8,
+    name: "Jueshi VSOP",
+    cnName: "爵仕 VSOP",
+    category: "Brandy",
+    price: "暂无",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "白兰地",
+    image: fallbackImage,
+    specs: ["法国", "1L*6", "40%vol"],
+    tasting: "爵仕VSOP，适合常规陈列与零售展示。",
+    range: "清甜花果"
+  },
+  {
+    id: 9,
+    name: "Royal Lanma XO",
+    cnName: "皇家兰马 XO",
+    category: "Brandy",
+    badge: "XO",
+    tasting: "皇家兰马XO，适合礼盒展示、零售陈列与宴席型消费。",
+    variants: [
+      {
+        label: "700ml",
+        image: fallbackImage,
+        price: "暂无",
+        priceNote: "条形码扫描价",
+        range: "优雅木香",
+        specs: ["法国", "700ml", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "1L",
+        image: fallbackImage,
+        price: "¥1280",
+        priceNote: "条形码扫描价",
+        range: "优雅木香",
+        specs: ["法国", "1L", "40%vol"],
+        soldOut: true
+      }
+    ]
+  },
+  {
+    id: 11,
+    name: "Xindian XO",
+    cnName: "新典 XO",
+    category: "Brandy",
+    price: "¥880",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "XO",
+    image: fallbackImage,
+    specs: ["法国", "700ml*6", "40%vol"],
+    tasting: "新典XO，适合基础高锚点陈列。",
+    range: "圆润花果"
+  },
+  {
+    id: 12,
+    name: "Yadian XO",
+    cnName: "雅典 XO",
+    category: "Brandy",
+    price: "¥880",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "XO",
+    image: "./yayi xo.JPG",
+    specs: ["法国", "700ml*6", "40%vol"],
+    tasting: "雅典XO，适合门店展示与礼赠。",
+    range: "清甜花香"
+  },
+  {
+    id: 13,
+    name: "Jinluyi XO",
+    cnName: "金路易 XO",
+    category: "Brandy",
+    badge: "XO",
+    tasting: "金路易XO，瓶型与礼盒更偏陈列感，适合礼赠与展示型消费场景。",
+    variants: [
+      {
+        label: "700ml",
+        image: "./jinluyi.JPG",
+        price: "¥988",
+        priceNote: "条形码扫描价",
+        range: "深邃花香",
+        specs: ["法国", "700ml", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "1L",
+        image: "./jinluyi.JPG",
+        price: "¥1280",
+        priceNote: "条形码扫描价",
+        range: "深邃花香",
+        specs: ["法国", "1L", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "1.5L",
+        image: "./jinluyi.JPG",
+        price: "¥2888",
+        priceNote: "条形码扫描价",
+        range: "深邃花香",
+        specs: ["法国", "1.5L", "40%vol"],
+        soldOut: true
+      }
+    ]
+  },
+  {
+    id: 16,
+    name: "Yinzun XO",
+    cnName: "银尊 XO",
+    category: "Brandy",
+    badge: "XO",
+    tasting: "银尊XO，适合礼盒展示型终端与宴席陈列。",
+    variants: [
+      {
+        label: "700ml",
+        image: fallbackImage,
+        price: "¥1280",
+        priceNote: "条形码扫描价",
+        range: "厚重甜香",
+        specs: ["法国", "700ml", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "1.5L",
+        image: fallbackImage,
+        price: "¥2888",
+        priceNote: "条形码扫描价",
+        range: "厚重甜香",
+        specs: ["法国", "1.5L", "40%vol"],
+        soldOut: true
+      }
+    ]
+  },
+  {
+    id: 18,
+    name: "Huangguan XO",
+    cnName: "皇冠 XO",
+    category: "Brandy",
+    badge: "XO",
+    tasting: "皇冠XO，适合零售、礼赠与宴席布置。",
+    variants: [
+      {
+        label: "1L",
+        image: fallbackImage,
+        price: "¥1280",
+        priceNote: "条形码扫描价",
+        range: "圆润木香",
+        specs: ["法国", "1L", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "1.5L",
+        image: fallbackImage,
+        price: "¥2888",
+        priceNote: "条形码扫描价",
+        range: "圆润木香",
+        specs: ["法国", "1.5L", "40%vol"],
+        soldOut: true
+      }
+    ]
+  },
+  {
+    id: 20,
+    name: "Jingdian XO 1L",
+    cnName: "经典 XO 1L",
+    category: "Brandy",
+    price: "¥1388",
+    priceNote: "条形码扫描价",
+    soldOut: false,
+    badge: "XO",
+    image: fallbackImage,
+    specs: ["法国", "1L*6", "40%vol"],
+    tasting: "经典XO，适合做更高一级的价格锚点。",
+    range: "沉稳木香"
+  },
+  {
+    id: 21,
+    name: "Huangma XO",
+    cnName: "皇马 XO",
+    category: "Brandy",
+    badge: "XO",
+    tasting: "皇马XO，大规格产品更适合陈列、宴席与价格锚点表达。",
+    variants: [
+      {
+        label: "700ml",
+        image: fallbackImage,
+        price: "¥1280",
+        priceNote: "条形码扫描价",
+        range: "成熟木香",
+        specs: ["法国", "700ml", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "1L",
+        image: fallbackImage,
+        price: "¥1680",
+        priceNote: "条形码扫描价",
+        range: "成熟木香",
+        specs: ["法国", "1L", "40%vol"],
+        soldOut: true
+      },
+      {
+        label: "3L",
+        image: fallbackImage,
+        price: "¥4280",
+        priceNote: "条形码扫描价",
+        range: "成熟木香",
+        specs: ["法国", "3L", "40%vol"],
+        soldOut: true
+      }
+    ]
+  }
+];
+
+const productGrid = document.getElementById("productGrid");
+const tasteGrid = document.getElementById("tasteGrid");
+const searchInput = document.getElementById("searchInput");
+const categorySelect = document.getElementById("categorySelect");
+
+const modal = document.getElementById("productModal");
+const modalImage = document.getElementById("modalImage");
+const modalTitle = document.getElementById("modalTitle");
+const modalSubtitle = document.getElementById("modalSubtitle");
+const modalPrice = document.getElementById("modalPrice");
+const modalPriceNote = document.getElementById("modalPriceNote");
+const modalSpecs = document.getElementById("modalSpecs");
+const modalTasting = document.getElementById("modalTasting");
+const modalRange = document.getElementById("modalRange");
+const closeModalBtn = document.getElementById("closeModalBtn");
+
+function getDefaultVariant(item) {
+  return item.variants ? item.variants[0] : item;
+}
+
+function renderProducts() {
+  const q = searchInput.value.trim().toLowerCase();
+  const category = categorySelect.value;
+
+  const filtered = products.filter(item => {
+    const matchCategory = category === "全部" || item.category === category;
+
+    const searchText = [
+      item.name || "",
+      item.cnName || "",
+      item.category || "",
+      item.tasting || "",
+      ...(item.variants
+        ? item.variants.flatMap(v => [v.label, ...(v.specs || [])])
+        : item.specs || [])
+    ].join(" ").toLowerCase();
+
+    const matchQuery = !q || searchText.includes(q);
+
+    return matchCategory && matchQuery;
+  });
+
+  productGrid.innerHTML = filtered.map(item => {
+    const defaultVariant = getDefaultVariant(item);
+
+    return `
+      <div class="card" id="product-card-${item.id}">
+        <div class="card-image-wrap">
+          <img class="card-image" id="card-image-${item.id}" src="${imageOrFallback(defaultVariant.image)}" alt="${item.name}" onerror="this.src=fallbackImage">
+          <div class="badge">${item.badge || ""}</div>
+          ${defaultVariant.soldOut ? '<div class="soldout">已售罄</div>' : ''}
+        </div>
+        <div class="card-body">
+          <div class="card-title">${item.name}</div>
+          <div class="card-subtitle">${item.cnName}</div>
+
+          ${
+            item.variants
+              ? `<div class="specs" style="margin-top:12px;">
+                  ${item.variants.map((v, i) => `
+                    <button
+                      class="spec variant-btn"
+                      style="cursor:pointer; border:none; ${i === 0 ? 'background:#c89a71; color:#1b1110;' : ''}"
+                      onclick="switchVariant(${item.id}, ${i})"
+                    >${v.label}</button>
+                  `).join("")}
+                </div>`
+              : ""
+          }
+
+          <div class="price-row">
+            <div>
+              <div class="price" id="card-price-${item.id}">${defaultVariant.price}</div>
+              <div class="price-note" id="card-price-note-${item.id}">${defaultVariant.priceNote}</div>
+            </div>
+            <div class="category">${item.category}</div>
+          </div>
+
+          <div class="specs" id="card-specs-${item.id}">
+            ${(defaultVariant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("")}
+          </div>
+
+          <div class="range-box">
+            <div class="range-label">风味走向</div>
+            <div class="range-value" id="card-range-${item.id}">${defaultVariant.range}</div>
+          </div>
+
+          <button class="detail-btn" onclick="openModal(${item.id})">点击查看详情</button>
+        </div>
+      </div>
+    `;
+  }).join("");
+}
+
+function switchVariant(productId, variantIndex) {
+  const item = products.find(p => p.id === productId);
+  if (!item || !item.variants) return;
+
+  const variant = item.variants[variantIndex];
+
+  document.getElementById(`card-image-${productId}`).src = imageOrFallback(variant.image);
+  document.getElementById(`card-price-${productId}`).textContent = variant.price;
+  document.getElementById(`card-price-note-${productId}`).textContent = variant.priceNote;
+  document.getElementById(`card-range-${productId}`).textContent = variant.range;
+  document.getElementById(`card-specs-${productId}`).innerHTML =
+    variant.specs.map(spec => `<span class="spec">${spec}</span>`).join("");
+
+  const card = document.getElementById(`product-card-${productId}`);
+  const soldoutOld = card.querySelector('.soldout');
+  if (soldoutOld) soldoutOld.remove();
+
+  if (variant.soldOut) {
+    const imageWrap = card.querySelector('.card-image-wrap');
+    imageWrap.insertAdjacentHTML('beforeend', '<div class="soldout">已售罄</div>');
+  }
+
+  const buttons = card.querySelectorAll('.variant-btn');
+  buttons.forEach((btn, index) => {
+    if (index === variantIndex) {
+      btn.style.background = '#c89a71';
+      btn.style.color = '#1b1110';
+    } else {
+      btn.style.background = '';
+      btn.style.color = '';
+    }
+  });
+}
+
+function renderTastingCards() {
+  tasteGrid.innerHTML = products.slice(0, 3).map(item => `
+    <div class="box">
+      <h3>${item.name}</h3>
+      <p style="margin-bottom:8px; color:#cdb8aa;">${item.cnName} · ${item.category}</p>
+      <p>${item.tasting || ""}</p>
+    </div>
+  `).join("");
+}
+
+function openModal(id) {
+  const item = products.find(p => p.id === id);
+  if (!item) return;
+
+  const variant = getDefaultVariant(item);
+
+  modalImage.src = imageOrFallback(variant.image);
+  modalImage.alt = item.name;
+  modalTitle.textContent = item.name;
+  modalSubtitle.textContent = item.cnName;
+  modalPrice.textContent = variant.price;
+  modalPriceNote.textContent = variant.priceNote;
+  modalSpecs.innerHTML = (variant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("");
+  modalTasting.textContent = item.tasting || "";
+  modalRange.textContent = variant.range;
+
+  const oldVariantBox = document.getElementById("modalVariantBox");
+  if (oldVariantBox) oldVariantBox.remove();
+
+  const oldBuyBox = document.getElementById("modalBuyBox");
+  if (oldBuyBox) oldBuyBox.remove();
+
+  const variantHtml = item.variants ? `
+    <div class="modal-block" id="modalVariantBox">
+      <div class="modal-block-title">规格选择</div>
+      <div class="specs">
+        ${item.variants.map((v, i) => `
+          <button
+            class="spec modal-variant-btn"
+            style="cursor:pointer; border:none; ${i === 0 ? 'background:#c89a71; color:#1b1110;' : ''}"
+            onclick="switchModalVariant(${id}, ${i})"
+          >${v.label}</button>
+        `).join("")}
+      </div>
+    </div>
+  ` : `<div id="modalVariantBox"></div>`;
+
+  const soldoutHtml = `
+    <div class="modal-block" id="modalBuyBox">
+      <button class="buy-btn-disabled">已售罄</button>
+    </div>
+  `;
+
+  modalRange.parentElement.insertAdjacentHTML("afterend", variantHtml + soldoutHtml);
+  modal.classList.add("show");
+}
+
+function switchModalVariant(productId, variantIndex) {
+  const item = products.find(p => p.id === productId);
+  if (!item || !item.variants) return;
+
+  const variant = item.variants[variantIndex];
+
+  modalImage.src = imageOrFallback(variant.image);
+  modalImage.alt = item.name;
+  modalPrice.textContent = variant.price;
+  modalPriceNote.textContent = variant.priceNote;
+  modalSpecs.innerHTML = (variant.specs || []).map(spec => `<span class="spec">${spec}</span>`).join("");
+  modalRange.textContent = variant.range;
+
+  const buttons = document.querySelectorAll('.modal-variant-btn');
+  buttons.forEach((btn, index) => {
+    if (index === variantIndex) {
+      btn.style.background = '#c89a71';
+      btn.style.color = '#1b1110';
+    } else {
+      btn.style.background = '';
+      btn.style.color = '';
+    }
+  });
+}
+
+function closeModal() {
+  modal.classList.remove("show");
+}
+
+searchInput.addEventListener("input", renderProducts);
+categorySelect.addEventListener("change", renderProducts);
+closeModalBtn.addEventListener("click", closeModal);
+modal.addEventListener("click", function(e) {
+  if (e.target === modal) closeModal();
+});
+
+renderProducts();
+renderTastingCards();
+  </script>
+</body>
+</html>

@@ -786,8 +786,8 @@ const products = [
       image: "./jinluyi.JPG",
       price: "¥988",
       priceNote: "条形码扫描价",
-      range: "建议零售价：¥298",
-      specs: ["法国", "皇马", "700ml*6", "40%vol"],
+range: "深邃花香",
+specs: ["法国", "700ml", "40%vol"],
       soldOut: true
     },
     {
@@ -795,8 +795,8 @@ const products = [
       image: "./jinluyi.JPG",
       price: "¥1280",
       priceNote: "条形码扫描价",
-      range: "建议零售价：¥368",
-      specs: ["法国", "皇马", "1L*6", "40%vol"],
+range: "深邃花香",
+specs: ["法国", "1L", "40%vol"],
       soldOut: true
     },
     {
@@ -804,8 +804,8 @@ const products = [
       image: "./jinluyi.JPG",
       price: "¥2888",
       priceNote: "条形码扫描价",
-      range: "建议零售价：¥498",
-      specs: ["法国", "皇马", "1.5L*4", "40%vol"],
+range: "深邃花香",
+specs: ["法国", "1.5L", "40%vol"],
       soldOut: true
     }
   ]
@@ -979,11 +979,11 @@ function renderProducts() {
             item.variants
               ? `<div class="specs" style="margin-top:12px;">
                   ${item.variants.map((v, i) => `
-                    <button
-                      class="spec"
-                      style="cursor:pointer; border:none; ${i === 0 ? 'background:#c89a71; color:#1b1110;' : ''}"
-                      onclick="switchVariant(${item.id}, ${i})"
-                    >${v.label}</button>
+<button
+  class="spec variant-btn"
+  style="cursor:pointer; border:none; ${i === 0 ? 'background:#c89a71; color:#1b1110;' : ''}"
+  onclick="switchVariant(${item.id}, ${i})"
+>${v.label}</button>
                   `).join("")}
                 </div>`
               : ""
@@ -1002,7 +1002,7 @@ function renderProducts() {
           </div>
 
           <div class="range-box">
-            <div class="range-label">价格区间</div>
+<div class="range-label">风味走向</div>
             <div class="range-value" id="card-range-${item.id}">${defaultVariant.range}</div>
           </div>
 
@@ -1013,6 +1013,70 @@ function renderProducts() {
   }).join("");
 }
 function switchVariant(productId, variantIndex) {
+  const item = products.find(p => p.id === productId);
+  if (!item || !item.variants) return;
+
+  const variant = item.variants[variantIndex];
+
+  document.getElementById(`card-image-${productId}`).src = variant.image;
+  document.getElementById(`card-price-${productId}`).textContent = variant.price;
+  document.getElementById(`card-price-note-${productId}`).textContent = variant.priceNote;
+  document.getElementById(`card-range-${productId}`).textContent = variant.range;
+  document.getElementById(`card-specs-${productId}`).innerHTML =
+    variant.specs.map(spec => `<span class="spec">${spec}</span>`).join("");
+
+  const card = document.getElementById(`product-card-${productId}`);
+  const soldoutOld = card.querySelector('.soldout');
+  if (soldoutOld) soldoutOld.remove();
+
+  if (variant.soldOut) {
+    const imageWrap = card.querySelector('.card-image-wrap');
+    imageWrap.insertAdjacentHTML('beforeend', '<div class="soldout">已售罄</div>');
+  }
+
+  const buttons = card.querySelectorAll('.variant-btn');
+  buttons.forEach((btn, index) => {
+    if (index === variantIndex) {
+      btn.style.background = '#c89a71';
+      btn.style.color = '#1b1110';
+    } else {
+      btn.style.background = '';
+      btn.style.color = '';
+    }
+  });
+}
+  const item = products.find(p => p.id === productId);
+  if (!item || !item.variants) return;
+
+  const variant = item.variants[variantIndex];
+
+  document.getElementById(`card-image-${productId}`).src = variant.image;
+  document.getElementById(`card-price-${productId}`).textContent = variant.price;
+  document.getElementById(`card-price-note-${productId}`).textContent = variant.priceNote;
+  document.getElementById(`card-range-${productId}`).textContent = variant.range;
+  document.getElementById(`card-specs-${productId}`).innerHTML =
+    variant.specs.map(spec => `<span class="spec">${spec}</span>`).join("");
+
+  const card = document.getElementById(`product-card-${productId}`);
+  const soldoutOld = card.querySelector('.soldout');
+  if (soldoutOld) soldoutOld.remove();
+
+  if (variant.soldOut) {
+    const imageWrap = card.querySelector('.card-image-wrap');
+    imageWrap.insertAdjacentHTML('beforeend', '<div class="soldout">已售罄</div>');
+  }
+
+  const buttons = card.querySelectorAll('.variant-btn');
+  buttons.forEach((btn, index) => {
+    if (index === variantIndex) {
+      btn.style.background = '#c89a71';
+      btn.style.color = '#1b1110';
+    } else {
+      btn.style.background = '';
+      btn.style.color = '';
+    }
+  });
+}
   const item = products.find(p => p.id === productId);
   if (!item || !item.variants) return;
 
